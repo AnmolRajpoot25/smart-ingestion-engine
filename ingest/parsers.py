@@ -43,6 +43,21 @@ def safe_decimal(value):
     return Decimal(cleaned)
 
 
+def csv_reader(text):
+    sample = text[:2048]
+
+    try:
+        dialect = csv.Sniffer().sniff(sample, delimiters=";,\t")
+    except csv.Error:
+        dialect = csv.excel
+        dialect.delimiter = ";"
+
+    return csv.DictReader(
+        io.StringIO(text),
+        dialect=dialect,
+    )
+
+
 # =========================================================
 # SAP PARSER
 # =========================================================
@@ -51,12 +66,7 @@ def parse_sap_csv(file_content):
 
     text = file_content.decode("utf-8-sig")
 
-    # IMPORTANT:
-    # Your CSV uses semicolon separator
-    reader = csv.DictReader(
-        io.StringIO(text),
-        delimiter=';'
-    )
+    reader = csv_reader(text)
 
     records = []
 
@@ -153,10 +163,7 @@ def parse_utility_csv(file_content):
 
     text = file_content.decode("utf-8-sig")
 
-    reader = csv.DictReader(
-        io.StringIO(text),
-        delimiter=';'
-    )
+    reader = csv_reader(text)
 
     records = []
 
@@ -249,10 +256,7 @@ def parse_travel_csv(file_content):
 
     text = file_content.decode("utf-8-sig")
 
-    reader = csv.DictReader(
-        io.StringIO(text),
-        delimiter=';'
-    )
+    reader = csv_reader(text)
 
     records = []
 
