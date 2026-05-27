@@ -46,7 +46,13 @@ function UploadPage() {
 
             console.error(err);
 
-            alert("Upload failed");
+            const errorMessage =
+                err.response?.data?.error ||
+                err.response?.data?.detail ||
+                err.message ||
+                "Upload failed";
+
+            alert(`Upload failed: ${errorMessage}`);
 
         } finally {
 
