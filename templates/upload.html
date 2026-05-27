@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload ESG Data</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        form{
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        input, select{
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        button{
+            padding: 10px 20px;
+            background: black;
+            color: white;
+            border: none;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Upload ESG Data</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <label>Source Type</label>
+
+        <select name="source_type">
+
+            <option value="sap">SAP</option>
+
+            <option value="utility">Utility</option>
+
+            <option value="travel">Travel</option>
+
+        </select>
+
+        <label>Select CSV File</label>
+
+        <input type="file" name="file">
+
+        <button type="submit">
+            Upload
+        </button>
+
+    </form>
+
+</body>
+
+</html>
