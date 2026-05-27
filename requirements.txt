@@ -4,7 +4,6 @@ django-cors-headers
 python-dateutil
 pandas
 openpyxl
-Pillow #--break-system-packages -q
-django-admin startproject config .
-python manage.py startapp ingest
-python manage.py startapp review
+Pillow
+gunicorn
+whitenoise
